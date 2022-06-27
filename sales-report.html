@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+      margin: 20px;
+      text-align: justify;
+    }
+
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 25px;
+        color: #191d2b;
+    }
+
+    p {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+</style>
+<body class="main-content">
+
+    <main>
+        <h1>Sales Reporting </h1>
+        <h2>1. Overview </h2>
+        <p>Assume we have multiple CSV files in the same folder. In general, they have the same layout and have the column headers are in the first row. </p>
+
+
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-file.JPG" style="width:100%">
+
+        <p>Imports the libraries we need.</p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
+%matplotlib inline
+
+from itertools import combinations
+from collections import Counter
+
+path = os.path.abspath('D:\DKTA\Tai lieu\github\project\Sales-Reporting\Sales-Reporting-main\data'
+files = os.listdir(path)
+
+df = pd.DataFrame()
+for file in files:
+    if file.endswith('.csv'):
+        filepath = path + '\\' + file
+        df = df.append(pd.read_csv(filepath), ignore_index=True)
+df.head()
+                </code>
+            </pre>
+        </div>
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-1.JPG">
+        <p>
+          We have DataFrame: df with 6 columns: Order ID, Product, Quantity Ordered, Price Each, Order Date, Purchase Address
+        </p>
+        <p>With code: df.shape will return the shape of df: 186850 rows and 6 columns</p>
+        <h2>2. Process data</h2>
+        <p>In the dataset have 545 values null of each columns. We drop mising values</p>
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-2.JPG" style="width:30%">
+
+        <p>Cast a pandas object to a specified dtype and add new column: day, month, sales, city</p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+# Cast a pandas object to a specified dtype
+df = df.astype({'Product':'category',
+                'Quantity_Ordered':'int',
+                'Price_Each':'float',
+                'Quantity_Ordered':'int'})
+
+df['Order_Date'] = pd.to_datetime(df['Order_Date'])
+
+df['day'] = pd.DatetimeIndex(df['Order_Date']).day
+df['month'] = pd.DatetimeIndex(df['Order_Date']).month
+
+# Add new column: calculate total, city
+df['Sales'] = df['Quantity_Ordered'] * df['Price_Each']
+df['City'] = df['Purchase_Address'].apply(lambda x: x.split(',')[1])
+df.head()
+                </code>
+            </pre>
+        </div>
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-3.JPG" style="width:70%">
+        <p>Creat dataframe groupby Product</p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+all_products = df.groupby('Product').sum()['Quantity_Ordered']
+prices = df.groupby('Product').mean()['Price_Each']
+total = df.groupby('Product').sum()['Sales']
+
+df_quantity_price = pd.concat([all_products, prices, total], axis=1)
+df_quantity_price.sort_values(by='Quantity_Ordered', ascending=False, inplace=True)
+df_quantity_price
+                </code>
+            </pre>
+        </div>
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-4.JPG" style="width:40%">
+        <h2>3. Visualization</h2>
+        <p> - Visualization Quantity Ordered of each product with Price and Sales</p>
+        <p> + Low-priced products have higher sales.</p>
+        <p> + Price and sales have a linear relationship.</p>
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-5.JPG" style="width:70%">
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-6.JPG" style="width:70%">
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-7.JPG" style="width:70%">
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-8.JPG" style="width:70%">
+
+        <iframe title="Comparative Analysis Dashboard" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=33a98c18-b35b-489b-a6a3-d7f52bd4c3da&autoAuth=true&ctid=c285d345-b296-4112-8e6e-7d74113c5484&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWItcHJpbWFyeS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D" frameborder="0" ></iframe>
+
+    </main>
+
+    <div class="theme-btn">
+        <i class="fas fa-adjust"></i>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
