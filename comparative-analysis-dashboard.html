@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparative Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+      margin: 2rem;
+      text-align: justify;
+      padding: 10px 20px;
+    }
+
+
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 25px;
+        color: #191d2b;
+    }
+
+    p {
+      font-size: 20px;
+      padding: 10px 10px 5px 5px;
+    }
+</style>
+<body class="main-content">
+
+    <main>
+        <h1>Comparative Analysis Dashboard </h1>
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/comparative-analysis-dashboard.JPG">
+        <h2>1. Overview </h2>
+        <p>We have Excel file: Budget and Sales Data.xlsx. Excel file has three sheets: Budget, Sales and Product Master  </p>
+        <p>Open Power BI and get data from Excel. We need create table Date Dimension to enhance the date and time-related analysis and reporting</p>
+
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/create-date-dim.JPG">
+
+        <p>Create relationships between tables: Budget, Sales, Product Master and Date Dim.</p>
+
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/data-model.PNG" style="width:70%">
+        <p> Create measure Current Year (CY), Previous Year (PY), Year over Year (YoY) for year-to-year comparison </p>
+
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/CY-PY-YoY-Measure.jpg" style="width:50%">
+
+        <p>Create Budgeted Sales and Budget Variance% measure</p>
+
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/budget sale and per.jpg" style="width:70%">
+        <p>Power BI Card is useful to display a single number (or metric value)</p>
+        <p>We can see imagine below. In 2020, Sales reach 723.7M, 23.6% lower than the budget and 18.5% lower than the previous year's sales</p>
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/card.JPG" style="width:80">
+
+        <p>
+            - Look at the Donut chart, we see that product category 3 (Cat3) accounts for the highest sales (36%) in 2020.
+            Followed by Cat 1 reaching 28.5%, Cat 4 reaching 21.2% and the lowest being Cat 2 reaching 14.3%
+        </p>
+        <p>- With scatter chart shows the relationship between CY Sales and YoY Sales Growth%</p>
+        <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/donut-line.JPG" style="width:70%">
+        <div class="row">
+            <div class="column">
+                <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/tooltip-1.jpg" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="https://raw.githubusercontent.com/dktuananh/Power-BI/main/Comparative Analysis Dashboard/tooltip-2.jpg" style="width:100%">
+            </div>
+        </div>
+
+        <div style="text-align:center;">
+            <iframe title="Comparative Analysis Dashboard" width="1040" height="640"
+                    src="https://app.powerbi.com/reportEmbed?reportId=33a98c18-b35b-489b-a6a3-d7f52bd4c3da&autoAuth=true&ctid=c285d345-b296-4112-8e6e-7d74113c5484&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWItcHJpbWFyeS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldC8ifQ%3D%3D"
+                    frameborder="0" >
+            </iframe>
+        </div>
+        <p> Referenced by https://www.pk-anexcelexpert.com</p>
+    </main>
+
+    <div class="theme-btn">
+        <i class="fas fa-adjust"></i>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
