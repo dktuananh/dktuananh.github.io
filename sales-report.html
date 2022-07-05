@@ -15,7 +15,7 @@
     body {
       margin: 2rem;
       text-align: justify;
-      padding: 10px 20px;
+      padding: auto;
     }
 
 
@@ -31,11 +31,10 @@
 
     p {
       font-size: 20px;
-      padding: 10px 20px;
+      padding: auto;
     }
 </style>
 <body class="main-content">
-
     <main>
         <h1 style="display:inline;">Sales Reporting </h1>
         <a style="display:inline;" href="https://github.com/dktuananh/sales-reporting" target="_blank"><u>(Link)</u></a>
@@ -70,14 +69,14 @@ df.head()
                 </code>
             </pre>
         </div>
-        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-1.JPG">
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-1.JPG" style="width:50%">
         <p>
           We have DataFrame: df with 6 columns: Order ID, Product, Quantity Ordered, Price Each, Order Date, Purchase Address
         </p>
         <p>With code: df.shape will return the shape of df: 186850 rows and 6 columns</p>
         <h2>2. Process data</h2>
         <p>In the dataset have 545 values null of each columns. We drop mising values</p>
-        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-2.JPG" style="width:30%">
+        <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-2.JPG" style="width:50%">
 
         <p>Cast a pandas object to a specified dtype and add new column: day, month, sales, city</p>
         <div class="highlight">

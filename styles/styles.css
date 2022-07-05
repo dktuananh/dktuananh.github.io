@@ -927,7 +927,8 @@ section {
 
 /*# code block */
 .highlight-wrapper {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 .highlight {
@@ -966,7 +967,7 @@ section {
   font-weight: 700;
   line-height: 14px;
   letter-spacing: 0.5px;
-  width: 65px;
+  width: auto;
   color: #232326;
   background-color: #7f7f7f;
   border: 1.25px solid #232326;
