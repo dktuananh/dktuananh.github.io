@@ -929,6 +929,7 @@ section {
 .highlight-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .highlight {
@@ -940,12 +941,12 @@ section {
 }
 
 .highlight > .chroma {
-  color: #d0d0d0;
-  background-color: #212121;
-  position: static;
-  z-index: 1;
-  border-radius: 1rem;
-  padding: 1rem;
+    color: #d0d0d0;
+    background-color: #212121;
+    position: static;
+    z-index: 1;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 
 .chroma .lntd:first-child {
