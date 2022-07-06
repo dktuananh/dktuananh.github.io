@@ -118,16 +118,112 @@ df_quantity_price
         <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-4.JPG" style="width:40%">
         <h2>3. Visualization</h2>
         <p> - Visualization Quantity Ordered of each product with Price and Sales</p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+# What product sold the most? price of product and revenue of each product
+
+fig, ax1 = plt.subplots(2, figsize=(12, 8))
+
+x = df_quantity_price.index
+y1 = df_quantity_price['Quantity_Ordered']
+y2 = df_quantity_price['Sales']
+y3 = df_quantity_price['Price_Each']
+
+ax1[0].bar(x, y1, color='g')
+ax1[0].set_ylabel('Quantity Ordered', color='g', size=14)
+ax1[0].set_xticklabels(x, rotation=45, size=12, ha='right')
+ax1[0].set(xticklabels=[])
+ax1[0].grid(False)
+
+ax2 = ax1[0].twinx()
+ax2.plot(x, y2, 'r')
+ax2.set_ylabel('Sales', color='r', size=14)
+ax2.set(xticklabels=[])
+ax2.grid(False)
+
+ax1[1].bar(x, y1, color='g')
+ax1[1].set_xlabel('Products')
+ax1[1].set_ylabel('Quantity Ordered', color='g', size=14)
+ax1[1].set_xticklabels(x, rotation=45, size=12, ha='right')
+ax1[1].grid(False)
+
+ax3 = ax1[1].twinx()
+ax3.plot(x, y3, 'r')
+ax3.set_ylabel('Price Each', color='r', size=14)
+ax3.grid(False)
+
+plt.show()
+                </code>
+            </pre>
+        </div>
         <p> + Low-priced products have higher sales.</p>
         <p> + Price and sales have linear relationships.</p>
         <p> + Macbook pro has the highest sales followed by iPhone and Thinkpad Laptop .</p>
         <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-5.JPG" style="width:70%">
-        <p> + Revenue increases gradually towards the end of the year but sales suffered an unexpectedly sharp fall in September.
+
+        <p> - Revenue increases gradually towards the end of the year but sales suffered an unexpectedly sharp fall in September.
             Sales reached the highest in December, possibly due to shopping demand, year-end gift giving on Christmas</p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+# Plot sum of products and total revenue by time
+quantity_by_month = df.groupby('month').sum()['Quantity_Ordered']
+total_by_month = df.groupby('month').sum()['Sales']
+
+df_month = pd.concat([quantity_by_month, total_by_month], axis=1)
+
+df_month
+# What was the best month for sales? How much was earned that month?
+fig, ax1 = plt.subplots( figsize=(12, 4))
+
+x = df_month.index
+y1 = df_month['Quantity_Ordered']
+y2 = df_month['Sales']
+
+ax1.bar(x, y1, color='g')
+ax1.set_ylabel('Quantity Ordered', color='g', size=14)
+ax1.grid(False)
+
+ax2 = ax1.twinx()
+ax2.plot(x, y2, 'r')
+ax2.set_ylabel('Sales', color='r', size=14)
+ax2.grid(False)
+                </code>
+            </pre>
+        </div>
         <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-6.JPG" style="width:70%">
         <p>
 
         </p>
+        <div class="highlight">
+            <pre class="chroma">
+                <code class="language-python" data-lang="python">
+# Plot sum of products and total revenue by city
+quantity_by_city = df.groupby('City').sum()['Quantity_Ordered']
+total_by_city = df.groupby('City').sum()['Sales']
+
+df_city = pd.concat([quantity_by_city, total_by_city], axis=1)
+df_city
+# What city has the best sales?
+fig, ax1 = plt.subplots( figsize=(12, 4))
+
+x = df_city.index
+y1 = df_city['Quantity_Ordered']
+y2 = df_city['Sales']
+
+ax1.bar(x, y1, color='g')
+ax1.set_ylabel('Quantity Ordered', color='g', size=14)
+ax1.set_xlabel('city', size=14)
+ax1.grid(False)
+
+ax2 = ax1.twinx()
+ax2.plot(x, y2, 'r')
+ax2.set_ylabel('Sales', color='r', size=14)
+ax2.grid(False)
+                </code>
+            </pre>
+        </div>
         <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-7.JPG" style="width:70%">
         <img src="https://raw.githubusercontent.com/dktuananh/sales-reporting/main/sales-report-8.JPG" style="width:70%">
 

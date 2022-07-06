@@ -228,7 +228,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 1rem;
+  padding-right: 7rem;
 }
 .header-content .right-header .name {
   font-size: 2rem;
@@ -240,6 +240,7 @@ section {
   margin: 0.5rem 0;
   line-height: 2rem;
   text-align: justify;
+
 }
 
 /*About*/
@@ -592,7 +593,7 @@ section {
 /*Independed components*/
 .btn-con {
   display: flex;
-  align-self: flex-start;
+  align-self: center;
 }
 
 .main-btn {
@@ -687,9 +688,9 @@ section {
 
   .right-header {
     grid-row: 1;
-    padding-right: 0rem !important;
+    padding-right: auto !important;
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
   }
   .right-header .name {
     font-size: 2.5rem !important;
@@ -949,6 +950,7 @@ section {
     z-index: 1;
     border-radius: 1rem;
     padding: 1rem;
+    font-size: 1rem;
 }
 
 .chroma .lntd:first-child {
