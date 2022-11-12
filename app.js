@@ -73,3 +73,5 @@ function addCopyButtonToDom(button, highlightDiv) {
 
 document.querySelectorAll(".highlight")
   .forEach(highlightDiv => createCopyButton(highlightDiv));
+
+
